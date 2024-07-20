@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     List<GameObject> fishPool;
     public static int score = 0;
     public static int highScore;
+    public static float volume = 0.5f;
     public GameObject commonFish, rareFish, epicFish, legendaryFish;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
             secondsText = "0" + seconds;
         else
             secondsText = seconds.ToString();
-        timerText.text = minutesText + ":" + secondsText;        
+        timerText.text = minutesText + ":" + secondsText;
     }
     public void UpdateScore(int scoreToAdd)
     {
@@ -59,9 +60,9 @@ public class GameManager : MonoBehaviour
         {
             if (counter > 9 && counter < 15)
                 pooledObj = Instantiate(rareFish, Vector3.zero, rareFish.transform.rotation);
-            else if(counter > 14 && counter < 20)
+            else if (counter > 14 && counter < 20)
                 pooledObj = Instantiate(epicFish, Vector3.zero, epicFish.transform.rotation);
-            else if(counter > 19)
+            else if (counter > 19)
                 pooledObj = Instantiate(legendaryFish, Vector3.zero, legendaryFish.transform.rotation);
             else
                 pooledObj = Instantiate(commonFish, Vector3.zero, commonFish.transform.rotation);
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
         }
         Fish fishScript = newFish.GetComponent<Fish>();
         float yRange = Random.Range(spawnPosYStart, spawnPosYEnd);
-        switch(fishSpawnPos)
+        switch (fishSpawnPos)
         {
             case SpawnPos.left:
                 newFish.transform.position = new Vector3(-spawnPosX, yRange);
