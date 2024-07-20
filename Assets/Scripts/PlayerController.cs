@@ -31,9 +31,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         xInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * xInput * moveSpeed * Time.deltaTime);
+        if (!GameManager.gameOver)
+            transform.Translate(Vector3.right * xInput * moveSpeed * Time.deltaTime);
         SetBounds();
-        if (!lineBusy && Input.GetKeyDown(KeyCode.Space))
+        if (!lineBusy && Input.GetKeyDown(KeyCode.Space) && !GameManager.gameOver)
         {
             StartCoroutine(LowerLine());
             lineBusy = true;
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
             fishingLine.transform.localScale = new Vector3(fishingLine.transform.localScale.x, scaleLerp, fishingLine.transform.localScale.z);
             posLerp = Mathf.Lerp(startPos, endPos, timeElapsed / duration);
             fishingLine.transform.position = new Vector3(fishingLine.transform.position.x, posLerp, fishingLine.transform.position.z);
-            if(hookScript.objectCaught)
+            if (hookScript.objectCaught)
             {
                 StartCoroutine(RaiseLine());
                 yield break;
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         lineBusy = false;
-        if(hookScript.objectCaught)
+        if (hookScript.objectCaught)
         {
             hookScript.CatchFish();
         }

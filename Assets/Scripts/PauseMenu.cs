@@ -50,6 +50,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void QuitToMainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
     public void VolumeAdjust()
