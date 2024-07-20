@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        timeRemaining = 5;
+        timeRemaining = 150;
         gameOver = false;
         gameOverMenu = gameObject.GetComponent<GameOverMenu>();
         PoolInit();
