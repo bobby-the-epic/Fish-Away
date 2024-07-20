@@ -8,18 +8,24 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu, optionsMenu;
-    public Button resumeButton;
-    public Button optionsButton;
-    public Button quitButton;
+    public Slider volumeSlider;
 
+    public void Start()
+    {
+        volumeSlider.value = GameManager.volume;
+    }
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!pauseMenu.activeInHierarchy)
+            if (!pauseMenu.activeInHierarchy && !optionsMenu.activeInHierarchy)
             {
                 pauseMenu.SetActive(true);
                 Time.timeScale = 0;
+            }
+            else if (optionsMenu.activeInHierarchy)
+            {
+                GoBack();
             }
             else
             {
@@ -45,5 +51,9 @@ public class PauseMenu : MonoBehaviour
     public void QuitToMainMenu()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+    public void VolumeAdjust()
+    {
+        GameManager.volume = volumeSlider.value;
     }
 }
