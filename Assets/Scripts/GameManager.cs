@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        timeRemaining = 150;
+        timeRemaining = 5;
+        gameOver = false;
         gameOverMenu = gameObject.GetComponent<GameOverMenu>();
         PoolInit();
         scoreText.text = "Score: " + score;
@@ -37,18 +38,6 @@ public class GameManager : MonoBehaviour
         if (!gameOver)
         {
             RunTimer();
-            if (timeRemaining <= 0)
-            {
-                gameOver = true;
-                if (highScore < score)
-                    highScore = score;
-                gameOverMenu.GameOver();
-            }
-        }
-        else
-        {
-            minutesText = "";
-            secondsText = "0";
         }
     }
     public void UpdateScore(int scoreToAdd)
@@ -70,7 +59,13 @@ public class GameManager : MonoBehaviour
         else
             secondsText = seconds.ToString();
         timerText.text = minutesText + ":" + secondsText;
-
+        if (timeRemaining <= 0)
+        {
+            gameOver = true;
+            if (highScore < score)
+                highScore = score;
+            gameOverMenu.GameOver();
+        }
     }
     void PoolInit()
     {

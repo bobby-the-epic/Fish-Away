@@ -17,7 +17,6 @@ public class GameOverMenu : MonoBehaviour
     }
     public void Restart()
     {
-        GameManager.gameOver = false;
         GameManager.score = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
