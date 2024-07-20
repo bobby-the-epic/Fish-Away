@@ -12,19 +12,21 @@ public class GameManager : MonoBehaviour
     int minutes, seconds;
     string minutesText, secondsText;
     int poolSize = 25;
+    GameOverMenu gameOverMenu;
+    SpawnPos fishSpawnPos = SpawnPos.left;
     GameObject pooledObj;
     List<GameObject> fishPool;
     public static int score = 0;
-    public static int highScore;
+    public static int highScore = 0;
     public static float volume = 0.5f;
     public static bool gameOver = false;
     public GameObject commonFish, rareFish, epicFish, legendaryFish;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI timerText;
-    SpawnPos fishSpawnPos = SpawnPos.left;
+    public TextMeshProUGUI scoreText, timerText;
 
-    void Start()
+    void Awake()
     {
+        timeRemaining = 150;
+        gameOverMenu = gameObject.GetComponent<GameOverMenu>();
         PoolInit();
         scoreText.text = "Score: " + score;
         //todo: Make intervals random
@@ -32,20 +34,43 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        timeRemaining -= Time.deltaTime;
-        seconds = (int)(timeRemaining % 60);
-        minutes = (int)(timeRemaining / 60);
-        minutesText = minutes.ToString();
-        if (seconds < 10)
-            secondsText = "0" + seconds;
+        if (!gameOver)
+        {
+            RunTimer();
+            if (timeRemaining <= 0)
+            {
+                gameOver = true;
+                if (highScore < score)
+                    highScore = score;
+                gameOverMenu.GameOver();
+            }
+        }
         else
-            secondsText = seconds.ToString();
-        timerText.text = minutesText + ":" + secondsText;
+        {
+            minutesText = "";
+            secondsText = "0";
+        }
     }
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+    void RunTimer()
+    {
+        timeRemaining -= Time.deltaTime;
+        seconds = (int)(timeRemaining % 60);
+        minutes = (int)(timeRemaining / 60);
+        if (minutes == 0)
+            minutesText = "";
+        else
+            minutesText = minutes.ToString();
+        if (seconds < 10)
+            secondsText = "0" + seconds;
+        else
+            secondsText = seconds.ToString();
+        timerText.text = minutesText + ":" + secondsText;
+
     }
     void PoolInit()
     {
