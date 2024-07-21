@@ -17,8 +17,7 @@ public class MainMenu : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape) && optionsScreen.activeInHierarchy)
         {
-            optionsScreen.SetActive(false);
-            titleScreen.SetActive(true);
+            GoBack();
         }
     }
     public void PlayGame()
@@ -33,5 +32,10 @@ public class MainMenu : MonoBehaviour
     {
         titleScreen.SetActive(false);
         optionsScreen.SetActive(true);
+    }
+    public void GoBack()
+    {
+        optionsScreen.SetActive(false);
+        titleScreen.SetActive(true);
     }
 }
