@@ -8,25 +8,25 @@ public class PlayerController : MonoBehaviour
     float xInput;
     float moveSpeed = 7;
     float startScale, startPos, endPos, scaleLerp, posLerp;
-    float endScale = 7.5f;
+    float endScale = 3.5f;
     float rightBound = 12;
     float leftBound = -13;
     bool lineBusy = false;
     Hook hookScript;
     BoxCollider2D fishingLineCollider;
-    public GameObject fishingLine, hook;
+    public GameObject fishingLine, hook, hookTarget;
 
     private void Start()
     {
         startScale = fishingLine.transform.localScale.y;
         startPos = fishingLine.transform.position.y;
-        endPos = startPos - 7;
+        endPos = startPos - 5.5f;
         fishingLineCollider = fishingLine.GetComponent<BoxCollider2D>();
         hookScript = hook.GetComponent<Hook>();
     }
     void FixedUpdate()
     {
-        hook.transform.position = fishingLineCollider.bounds.min;
+        hook.transform.position = hookTarget.transform.position;
     }
     void Update()
     {
@@ -85,6 +85,9 @@ public class PlayerController : MonoBehaviour
         to reel in would scale based on how far the line was lowered. It sounds weird, but
         if duration is constant, then the reel in time would not be constant. I need the reel
         in time to be constant so that lowering the line and reeling in feels consistent.
+
+        Update: The reel in duration is still being scaled for some reason, but it wasn't as bad as it was before. I realized that
+        making an animation would be much simpler than this god awful lerping routine, but I couldn't figure out the timing, so the lerp stays.
         */
         while (scaleLerp != startScale)
         {

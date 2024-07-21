@@ -37,9 +37,9 @@ public class Fish : Catchable
     }
     void FixedUpdate()
     {
-       if(!caught)
+        if (!caught)
         {
-            switch(spawnPos)
+            switch (spawnPos)
             {
                 case SpawnPos.left:
                     transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
@@ -51,7 +51,7 @@ public class Fish : Catchable
                     if (transform.position.x < -xBound)
                         gameObject.SetActive(false);
                     break;
-            }    
+            }
         }
     }
 }

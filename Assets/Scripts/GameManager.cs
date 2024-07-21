@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     float spawnPosX = 15;
     float spawnPosYStart = 3;
     float spawnPosYEnd = -6;
-    float timeRemaining = 150;
+    float timeRemaining;
     int minutes, seconds;
     string minutesText, secondsText;
     int poolSize = 25;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        timeRemaining = 150;
+        timeRemaining = 151;
         gameOver = false;
         gameOverMenu = gameObject.GetComponent<GameOverMenu>();
         PoolInit();
@@ -107,11 +107,13 @@ public class GameManager : MonoBehaviour
         {
             case SpawnPos.left:
                 newFish.transform.position = new Vector3(-spawnPosX, yRange);
+                newFish.GetComponentInChildren<SpriteRenderer>().flipX = false;
                 fishScript.spawnPos = fishSpawnPos;
                 fishSpawnPos = SpawnPos.right;
                 break;
             case SpawnPos.right:
                 newFish.transform.position = new Vector3(spawnPosX, yRange);
+                newFish.GetComponentInChildren<SpriteRenderer>().flipX = true;
                 fishScript.spawnPos = fishSpawnPos;
                 fishSpawnPos = SpawnPos.left;
                 break;
