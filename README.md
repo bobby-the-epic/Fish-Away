@@ -5,7 +5,7 @@
 Fish Away is a 2D fishing simulator prototype made in Unity.
 The player has two minutes to catch as many fish as
 they can. Fish come in rarities and some are worth
-more than others.
+more points than others.
 
 ## Controls
 
