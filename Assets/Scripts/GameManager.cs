@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     List<GameObject> fishPool;
     public static int score = 0;
     public static int highScore = 0;
-    public static float volume = 0.5f;
     public static bool gameOver = false;
     public GameObject commonFish, rareFish, epicFish, legendaryFish;
     public TextMeshProUGUI scoreText, timerText;

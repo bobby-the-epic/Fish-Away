@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    AudioSource backgroundMusic;
     public Slider volumeSlider;
     public GameObject optionsScreen, titleScreen;
 
     public void Start()
     {
-        volumeSlider.value = GameManager.volume;
+        backgroundMusic = GetComponent<AudioSource>();
     }
     public void Update()
     {
@@ -26,7 +27,7 @@ public class MainMenu : MonoBehaviour
     }
     public void VolumeAdjust()
     {
-        GameManager.volume = volumeSlider.value;
+        backgroundMusic.volume = volumeSlider.value;
     }
     public void OptionsMenu()
     {

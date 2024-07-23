@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    AudioSource backgroundMusic;
     public GameObject pauseMenu, optionsMenu;
     public Slider volumeSlider;
 
     public void Start()
     {
-        volumeSlider.value = GameManager.volume;
+        backgroundMusic = GetComponent<AudioSource>();
     }
     public void Update()
     {
@@ -55,6 +56,6 @@ public class PauseMenu : MonoBehaviour
     }
     public void VolumeAdjust()
     {
-        GameManager.volume = volumeSlider.value;
+        backgroundMusic.volume = volumeSlider.value;
     }
 }
