@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Hook : MonoBehaviour
@@ -16,7 +14,7 @@ public class Hook : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!objectCaught)
+        if (!objectCaught)
         {
             caughtObject = collision.gameObject;
             caughtObjScript = caughtObject.GetComponent<Catchable>();
