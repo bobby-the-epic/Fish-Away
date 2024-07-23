@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,6 +12,8 @@ public class PlayerController : MonoBehaviour
     bool lineBusy = false;
     Hook hookScript;
     BoxCollider2D fishingLineCollider;
+    AudioSource sfx;
+    public AudioClip catchSound;
     public GameObject fishingLine, hook, hookTarget;
 
     private void Start()
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
         endPos = startPos - 5.5f;
         fishingLineCollider = fishingLine.GetComponent<BoxCollider2D>();
         hookScript = hook.GetComponent<Hook>();
+        sfx = GetComponent<AudioSource>();
     }
     void FixedUpdate()
     {
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour
         if (hookScript.objectCaught)
         {
             hookScript.CatchFish();
+            sfx.PlayOneShot(catchSound);
         }
     }
 }
